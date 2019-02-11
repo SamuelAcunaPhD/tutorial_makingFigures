@@ -1,4 +1,4 @@
-% Filename: example2_preferencesAtStartOfScript.m
+% Filename: dummyFigure_preferencesAtStartOfScript.m
 % Author:   Samuel Acuña
 % Date:     23 Jan 2019
 % Description: An example of how to easily format figures in Matlab, and
@@ -6,13 +6,6 @@
 % preferences first, making processing your figure a bit easier.
 %
 % NOTE: This example was created using MatLab R2018a
-%
-% NOTE: this code works best by running individual 
-% sections (or cells) individually. This can be done by 
-% pressing "run section" or "run and advance" in the 
-% editor tab (i recommend memorizing the keyboard shortcut).
-% for more information, see: https://www.mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html
-
 clear; close all; clc;
 
 

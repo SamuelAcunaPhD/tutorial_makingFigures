@@ -1,6 +1,6 @@
-% Filename:	example3b_startupFile.m
+% Filename:	exampleStartupFile.m
 % Author:	Samuel Acuna
-% Date:		21 Jul 2015
+% Date:		11 Feb 2019
 % Subject:	Matlab Startup file
 % About:	Example of a MatLab startup file. To use, rename this file as
 %           'startup.m' and place it in the MatLab userpath directory. 

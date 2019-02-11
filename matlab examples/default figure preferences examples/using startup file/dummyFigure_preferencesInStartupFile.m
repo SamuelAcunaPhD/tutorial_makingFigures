@@ -1,20 +1,32 @@
-% Filename: example1_figureFormatting.m
+% Filename: dummyFigure_preferencesInStartupFile.m
 % Author:   Samuel Acuña
 % Date:     23 Jan 2019
 % Description: An example of how to easily format figures in Matlab, and
-% then export them into a vector image format
+% then export them into a vector image format. This version assumes figure
+% preferences have been established in a startup.m file.
 %
 % NOTE: This example was created using MatLab R2018a
+
+% This example works when you have a MatLab startup.m file, that sets your
+% figure preferences for the duration of your matlab session.
 %
-% NOTE: this code works best by running individual 
-% sections (or cells) individually. This can be done by 
-% pressing "run section" or "run and advance" in the 
-% editor tab (i recommend memorizing the keyboard shortcut).
-% for more information, see: https://www.mathworks.com/help/matlab/matlab_prog/run-sections-of-programs.html
+% STEP 1: change name of file "example3b_startupFile.m" to "startup.m"
+% STEP 2: place "startup.m" in your MatLab search path. probably the first main folder in the path.
+% STEP 3: restart MatLab, or type: >> startup
+%
+% now, everytime you start MatLab your "startup.m" file automatically
+% executes.
+%
+% keep in mind: 
+%   1. to rerun your startup file, just type: >> startup
+%   2. to reset the graphics root handle to factory defaults, 
+%      just type: >> set(groot, 'Default', struct());
+%      but it will reload your preferences every time you start MatLab
+%
 
 clear; close all; clc;
 
-%% dummy data
+%% dummy data, same as before
 
 data_x = -pi:0.01:pi;
 data_y1 = 5*sin(data_x); 
@@ -28,12 +40,11 @@ data_error1 = 2*rand(5,1);
 data_means2 = 2*rand(5,1)+4;
 data_error2 = 3*rand(5,1);
 
-%% plot dummy data 
+%% plot dummy data, but dont need to specify preferences beforehand
 % note: I use Handles for most elements of my plots, in case I need to go
 % back and adjust their properties. Not all will be used in this example.
 % If you need to pull a handle for pervious plots, try : 
 %   h = get(ax(3), 'children'); % pull handles of lines
-
 
 % create a figure
 fig = figure(); 
@@ -71,57 +82,32 @@ yl3 = ylabel('y_values','Interpreter','none');
 
 % At this point the figure doesnt look publication worthy. 
 % Let's try to clean it up a bit.
-return
 
 %% clean up figure
-% update some key figure properties:
 fig.Name = 'example figure';
-fig.Color = [1 1 1]; % or = 'w'; % set background color to white
 
-% clean up axes 1
-pl1(1).LineWidth = 2;
-pl1(2).LineWidth = 2;
-
+% still need to specifcy axis limits
 axes(ax(1)); % set focus
 xlim([-pi pi])
 ylim([-10 10])
 yticks([-10 -5 0 5 10]) % by manually setting these, Matlab wont automatically change them when you resize
-box off
+box off % tried to set preference for box off, but this overridden by plot command. see: https://www.mathworks.com/matlabcentral/answers/79229-set-0-defaultaxesbox-off-is-not-honored-by-plot
 
-% clean up axes 2
+
 axes(ax(2)); % set focus
-for i = 1:3
-    pl2(i).LineStyle = 'none'; % turn off edges
-end
 ll2 = legend('Slow','Med','Fast');
 ylim([0 30])
 yticks([0 15 30])
-yl2.Interpreter = 'none';
 box off
 
-% clean up axes 3
 axes(ax(3)); % set focus
-
-pl3(1).LineWidth = 1;
-pl3(2).LineWidth = 1; 
-pl3(1).MarkerFaceColor = 'b';
 pl3(2).MarkerFaceColor = 'w';
-pl3(1).MarkerSize = 3;
-pl3(2).MarkerSize = 3;
-
 ll3 = legend({'Top','Bottom'},'Location','southwest');
 ylim([0 10])
 yticks([0 5 10])
 xlim([0.5 5.5])
 box off
 
-%% set font sizes
-fsize = 7; % recommended artwork font size for Elsevier publications
-
-% axes
-ax(1).FontSize = fsize;
-ax(2).FontSize = fsize;
-ax(3).FontSize = fsize;
 
 %% save figure
 
@@ -130,10 +116,13 @@ ax(3).FontSize = fsize;
 % fig.PaperUnits = 'centimeters'; 
 % fig.PaperPosition = [0 0 9.0 10 ];  % [left bottom width height]
 % 
-% filename = 'example1_figure';
+% filename = 'example2_figure';
 % print(filename,'-depsc','-painters','-loose') % save as .eps in color (vector)
 % % print(filename,'-dpdf','-painters','-loose') % save as .pdf (vector)
 % % print(filename,'-dpng','-painters','-loose') % save as .png (raster)
 % % print(filename,'-djpeg','-painters','-loose') % save as .jpg (raster)
+
+
+
 
 
